@@ -21,3 +21,7 @@ The bot will internally divide numerous anime titles into categories that can be
 - Do you want to watch something lightweight, or maybe something more serious?
 - Are you able to switch your brain off and enjoy the absolute trash and degeneracy the worse end of this art medium has to offer?
   - In which case, are you alone, preferably wearing headphones so your family doesn't come asking questions?
+
+## Example conversation flowchart model:
+
+A flowchart that roughly outlines how conversation pathways mmight work is available for viewing on miro.com. A link to the [Flowchart](https://miro.com/app/board/o9J_ldHpams=/) is provided here.
