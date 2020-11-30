@@ -1,11 +1,27 @@
+// Populate discussionTree object
+const discussionTree = {};
+
+// Remember the name
+let userName = "";
+
 // array to track the chat messages
 const chatLogs = [];
+
+// write an input validation function here
+
+// write a conversation reset function here
 
 /**
  *
  * FINISH THIS FUNCTION!
  */
 const getBotReply = (msg) => {
+  // if statement to check for global commands. eg. restart, name change or whatever
+  // ask for userName
+  // give question
+  // parse the answer
+  // rewrite discussionTree with new route
+
   return "Error unknown...";
 };
 
