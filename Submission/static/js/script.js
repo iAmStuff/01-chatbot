@@ -167,7 +167,7 @@ const validateInput = (input, type) => {
     }
   };
   answer = input.toLowerCase();
-  answerArray = answer.split();
+  answerArray = answer.split(" ");
   // create an array of all words the user entered and check if any of these words match a keyword from the appropriate sub-object in knownInputs
   if (answerArray.some(parseType)) {
     console.log("Input vaildated as positive");
