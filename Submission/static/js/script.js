@@ -1,3 +1,6 @@
+// Remember the name
+let userName = "";
+
 // Populate discussionTree object
 const discussionTree = {
   question: `Hi ${userName}, first things first: Are you new to anime?`,
@@ -40,7 +43,7 @@ const discussionTree = {
       old: ["Tengen Toppa Gurren Lagann", "Noragami", "Fullmetal alchemist"],
       new: {
         question:
-          "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
+          "Do you want to watch a currently airing anime? Or would you rather watch something that has finished airing?",
         questionType: "airing",
         ongoing: "Jujutsu Kaisen",
         finished: ["One Punch Man", "Demon slayer: Kimetsu no Yaiba"],
@@ -103,22 +106,102 @@ const discussionTree = {
     },
   },
 };
-
-// Remember the name
-let userName = "";
+// knownInputs object here
+// inputs are kinda vague and unnatural at this state
+// things should improve once get a chance to work on the
+// validate input function.
+const knownInputs = {
+  horror: {
+    yes: ["yes", "yeah", "yea", "yep", "sure", "why not", "fine"],
+    no: ["no", "nope", "nay", "negative", "no thanks", "i'm good"],
+  },
+  newbie: {
+    yes: ["yes", "yeah", "yea", "yep"],
+    no: ["no", "nope", "nay", "negative"],
+  },
+  genre: {
+    romCom: [
+      "romance",
+      "comedy",
+      "romcom",
+      "romantic comedy",
+      "shojou",
+      "the former",
+    ],
+    action: ["action", "shounen", "the latter"],
+  },
+  filmAge: {
+    old: ["classic", "classics", "old", "older"],
+    new: ["new", "fresh", "recent", "newer"],
+  },
+  airing: {
+    ongoing: ["currently airing", "ongoing", "airing", "current"],
+    finshed: ["finished", "over", "finished airing", "complete"],
+  },
+  weight: {
+    light: [
+      "light",
+      "lightweight",
+      "wholesome",
+      "easy",
+      "easy-going",
+      "less serious",
+      "simple",
+    ],
+    heavy: ["heavy", "heavyweight", "serious", "complex", "emotional", "rough"],
+  },
+};
 
 // array to track the chat messages
 const chatLogs = [];
 
 // write an input validation function here
+const validateInput = (input, type) => {
+  console.log("begin validateInput");
+  const parseType = (input) => {
+    answers = Object.keys(knownInputs[type]); // create array of answers we are attempting to translate the input to
+    if (knownInputs[type][answers[0]].includes(input)) {
+      return answers[0];
+    } else if (knownInputs[type][answers[1]].includes(input)) {
+      return answers[1];
+    }
+  };
+  answer = input.toLowerCase();
+  answerArray = answer.split();
+  // create an array of all words the user entered and check if any of these words match a keyword from the appropriate sub-object in knownInputs
+  if (answerArray.some(parseType)) {
+    console.log("Input vaildated as positive");
+    //console.log();
+  } //else if (true) {
 
+  // }
+  else {
+    console.log("Input failed to validate");
+  }
+  // backup switch method
+  // switch (type) {
+  //   case "horror":
+  //   case "newbie":
+  //   case "genre":
+  //   case "filmAge":
+  //   case "airing":
+  //   case "weight":
+  //   default:
+  //     throw "Error validating input";
+  //}
+};
 // write a conversation reset function here
 
+// new root discussionTree clone
+let currentBranch = discussionTree;
 /**
  *
  * FINISH THIS FUNCTION!
  */
 const getBotReply = (msg) => {
+  // validate input
+  type = currentBranch.questionType;
+  answer = validateInput(msg, type);
   // if statement to check for global commands. eg. restart, name change or whatever
   // ask for userName
   // give question
