@@ -1,5 +1,7 @@
 // Remember the name
 let userName = "";
+// placeholder userName
+userName = "John Doe";
 
 // Populate discussionTree object
 const discussionTree = {
@@ -106,18 +108,26 @@ const discussionTree = {
     },
   },
 };
+
+// clone discussionTree to a variable so we can move the tree root
+let currentBranch = discussionTree;
+
+// declare path on global scope so we can modify it from our nested functions below
+let path = "";
+
 // knownInputs object here
 // inputs are kinda vague and unnatural at this state
 // things should improve once get a chance to work on the
 // validate input function.
 const knownInputs = {
+  // keywords that contain spaces currently cannot be validated with this method. revisit this later
   horror: {
     yes: ["yes", "yeah", "yea", "yep", "sure", "why not", "fine"],
     no: ["no", "nope", "nay", "negative", "no thanks", "i'm good"],
   },
   newbie: {
-    yes: ["yes", "yeah", "yea", "yep"],
-    no: ["no", "nope", "nay", "negative"],
+    yes: ["yes", "yeah", "yea", "yep", "i guess so"],
+    no: ["no", "nope", "nay", "negative", "i guess not"],
   },
   genre: {
     romCom: [
@@ -159,41 +169,28 @@ const chatLogs = [];
 const validateInput = (input, type) => {
   console.log("begin validateInput");
   const parseType = (input) => {
+    // sub function to be used with forEach() method
     answers = Object.keys(knownInputs[type]); // create array of answers we are attempting to translate the input to
     if (knownInputs[type][answers[0]].includes(input)) {
-      return answers[0];
+      console.log(`Input parsed with value "${answers[0]}"`);
+      path = answers[0];
     } else if (knownInputs[type][answers[1]].includes(input)) {
-      return answers[1];
+      console.log(`Input parsed with value "${answers[1]}"`);
+      path = answers[1];
+    } else {
+      console.log("Input failed to validate");
     }
+    // not too sure if these if statements can be combined into something simpler. considering I had to go the extra mile to make sure the code runs once for each answer group, I don't know of any ways i can make this simpler.
   };
   answer = input.toLowerCase();
   answerArray = answer.split(" ");
   // create an array of all words the user entered and check if any of these words match a keyword from the appropriate sub-object in knownInputs
-  if (answerArray.some(parseType)) {
-    console.log("Input vaildated as positive");
-    //console.log();
-  } //else if (true) {
 
-  // }
-  else {
-    console.log("Input failed to validate");
-  }
-  // backup switch method
-  // switch (type) {
-  //   case "horror":
-  //   case "newbie":
-  //   case "genre":
-  //   case "filmAge":
-  //   case "airing":
-  //   case "weight":
-  //   default:
-  //     throw "Error validating input";
-  //}
+  return answerArray.some(parseType);
 };
+
 // write a conversation reset function here
 
-// new root discussionTree clone
-let currentBranch = discussionTree;
 /**
  *
  * FINISH THIS FUNCTION!
@@ -201,14 +198,13 @@ let currentBranch = discussionTree;
 const getBotReply = (msg) => {
   // validate input
   type = currentBranch.questionType;
-  answer = validateInput(msg, type);
+  validateInput(msg, type);
   // if statement to check for global commands. eg. restart, name change or whatever
   // ask for userName
   // give question
-  // parse the answer
-  // rewrite discussionTree with new route
-
-  return "Error unknown...";
+  // rewrite currentBranch with new root
+  currentBranch = currentBranch[path];
+  return currentBranch.question;
 };
 
 const renderChatbox = () => {
