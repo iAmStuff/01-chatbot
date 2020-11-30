@@ -199,11 +199,22 @@ const getBotReply = (msg) => {
   // validate input
   type = currentBranch.questionType;
   validateInput(msg, type);
+  currentBranch = currentBranch[path];
   // if statement to check for global commands. eg. restart, name change or whatever
+  // if statement to see if we found the answer yet
+  if (typeof currentBranch == "string") {
+    console.log("answer is string");
+    return `I suggest you try watching ${currentBranch}`;
+  } else if (Array.isArray(currentBranch)) {
+    console.log("answer is array");
+    return `I suggest you try watching ${
+      currentBranch[Math.floor(Math.random() * currentBranch.length)]
+    }`;
+  }
   // ask for userName
   // give question
   // rewrite currentBranch with new root
-  currentBranch = currentBranch[path];
+
   return currentBranch.question;
 };
 
