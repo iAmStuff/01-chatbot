@@ -1,5 +1,108 @@
 // Populate discussionTree object
-const discussionTree = {};
+const discussionTree = {
+  question: `Hi ${userName}, first things first: Are you new to anime?`,
+  questionType: "newbie",
+  yes: {
+    question:
+      "Would you rather watch romantic comedy style shows, or maybe something more action-y?",
+    questionType: "genre",
+    romCom: {
+      question:
+        "Do you want to watch something lightweight, or maybe something more heavy going?",
+      questionType: "weight",
+      light: {
+        question: `Do you want to watch one of the "must-watch" classics, or would you rather watch something more recent?`,
+        questionType: "filmAge",
+        old: [
+          "Toradora",
+          "Sakurasou no Pet na Kanojo",
+          "Mikakunin de Shinkoukei",
+          "Hyouka",
+        ],
+        new: {
+          question:
+            "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
+          questionType: "airing",
+          ongoing: "Tonikaku Kawaii",
+          finished: "Kaguya-sama: Love is war",
+        },
+      },
+      heavy: [
+        "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+        "Ano Hi Mita Hana no Namae wo Bokutachi wa Mada Shiranai (Anohana)",
+        "Shigatsu wa Kimi no Uso",
+        "Steins; Gate",
+      ],
+    },
+    action: {
+      question: `Do you want to watch one of the "must-watch" classics, or would you rather watch something more recent?`,
+      questionType: "filmAge",
+      old: ["Tengen Toppa Gurren Lagann", "Noragami", "Fullmetal alchemist"],
+      new: {
+        question:
+          "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
+        questionType: "airing",
+        ongoing: "Jujutsu Kaisen",
+        finished: ["One Punch Man", "Demon slayer: Kimetsu no Yaiba"],
+      },
+    },
+  },
+  no: {
+    question:
+      "Are you in a Romcom kinda mood? Or maybe an action kinda mood instead?",
+    questionType: "genre",
+    romCom: {
+      question:
+        "Do you want to watch something lightweight, or maybe something more heavy going?",
+      questionType: "weight",
+      light: {
+        question:
+          "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
+        questionType: "airing",
+        ongoing: "Majou no Tabitabi",
+        finished: [
+          "Sewayaki Kitsune no Senko-san",
+          "5-Toubun no Hanayome",
+          "Wotaku ni Koi wa Muzukashii",
+          "Yuru Camp△",
+        ],
+      },
+      heavy: {
+        question: "Do you feel like suffering today?",
+        questionType: "suffering",
+        yes: ["Clannad", "Kanojo Okarishimasu"],
+        no: {
+          question:
+            "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
+          questionType: "airing",
+          ongoing: "Kamisama ni Natta Hi",
+          finished: [
+            "Haruhi Suzumiya",
+            "Monogatari series",
+            "Yahari Ore no Seishun Love Comedy wa Machigatteiru",
+          ],
+        },
+      },
+    },
+    action: {
+      question:
+        "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
+      questionType: "airing",
+      ongoing: {
+        question: "Opinon on horror anime?",
+        questionType: "horror",
+        yes: "Higurashi no Naku Koro ni Gou",
+        no: "Jujutsu Kaisen",
+        finished: [
+          "Demon slayer: Kimetsu no Yaiba",
+          "Tengen Toppa Gurren Lagann",
+          "Noragami",
+          "Fullmetal Alchemist",
+        ],
+      },
+    },
+  },
+};
 
 // Remember the name
 let userName = "";
