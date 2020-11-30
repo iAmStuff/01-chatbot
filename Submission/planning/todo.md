@@ -4,6 +4,7 @@
 
 - Ask for username and utilize it during conversation
 - Optimize parseType function to use loops or other functions to avoid repetition
+- Add an actual response when input fails to validate as expected
 
 ## Optional
 
