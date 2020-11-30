@@ -28,8 +28,8 @@ const discussionTree = {
           question:
             "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
           questionType: "airing",
-          ongoing: "Tonikaku Kawaii",
-          finished: "Kaguya-sama: Love is war",
+          ongoing: ["Tonikaku Kawaii"],
+          finished: ["Kaguya-sama: Love is war"],
         },
       },
       heavy: [
@@ -47,7 +47,7 @@ const discussionTree = {
         question:
           "Do you want to watch a currently airing anime? Or would you rather watch something that has finished airing?",
         questionType: "airing",
-        ongoing: "Jujutsu Kaisen",
+        ongoing: ["Jujutsu Kaisen"],
         finished: ["One Punch Man", "Demon slayer: Kimetsu no Yaiba"],
       },
     },
@@ -64,7 +64,7 @@ const discussionTree = {
         question:
           "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
         questionType: "airing",
-        ongoing: "Majou no Tabitabi",
+        ongoing: ["Majou no Tabitabi"],
         finished: [
           "Sewayaki Kitsune no Senko-san",
           "5-Toubun no Hanayome",
@@ -80,7 +80,7 @@ const discussionTree = {
           question:
             "Do you wnat to watch a currently airing anime? Or would you rather watch something that has finished airing?",
           questionType: "airing",
-          ongoing: "Kamisama ni Natta Hi",
+          ongoing: ["Kamisama ni Natta Hi"],
           finished: [
             "Haruhi Suzumiya",
             "Monogatari series",
@@ -96,8 +96,8 @@ const discussionTree = {
       ongoing: {
         question: "Opinon on horror anime?",
         questionType: "horror",
-        yes: "Higurashi no Naku Koro ni Gou",
-        no: "Jujutsu Kaisen",
+        yes: ["Higurashi no Naku Koro ni Gou"],
+        no: ["Jujutsu Kaisen"],
         finished: [
           "Demon slayer: Kimetsu no Yaiba",
           "Tengen Toppa Gurren Lagann",
@@ -191,29 +191,25 @@ const validateInput = (input, type) => {
 
 // write a conversation reset function here
 
-/**
- *
- * FINISH THIS FUNCTION!
- */
 const getBotReply = (msg) => {
   // validate input
   type = currentBranch.questionType;
   validateInput(msg, type);
+  // rewrite currentBranch with new root
   currentBranch = currentBranch[path];
   // if statement to check for global commands. eg. restart, name change or whatever
   // if statement to see if we found the answer yet
-  if (typeof currentBranch == "string") {
-    console.log("answer is string");
-    return `I suggest you try watching ${currentBranch}`;
+  if (currentBranch.length == 1) {
+    console.log("answer is an array with a single entry");
+    return `I suggest you try watching ${currentBranch[0]}`;
   } else if (Array.isArray(currentBranch)) {
     console.log("answer is array");
     return `I suggest you try watching ${
       currentBranch[Math.floor(Math.random() * currentBranch.length)]
+      // random entry from answers array
     }`;
   }
-  // ask for userName
-  // give question
-  // rewrite currentBranch with new root
+  // TODO: ask for userName
 
   return currentBranch.question;
 };
