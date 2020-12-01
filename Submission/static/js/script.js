@@ -138,9 +138,9 @@ const knownInputs = {
       "romcom",
       "romantic comedy",
       "shojou",
-      "the former",
+      "former",
     ],
-    action: ["action", "shounen", "the latter"],
+    action: ["action", "shounen", "latter"],
   },
   filmAge: {
     old: ["classic", "classics", "old", "older"],
@@ -176,12 +176,18 @@ const setName = (input) => {
 
 // clone discussionTree to a variable so we can move the tree root
 let currentBranch;
+
 // write an input validation function here
 const validateInput = (input, type) => {
   console.log("begin validateInput");
   const parseType = (input) => {
-    // sub function to be used with forEach() method
+    // sub function to be used with some() method
     answers = Object.keys(knownInputs[type]); // create array of answers we are attempting to translate the input to
+    // example output where type = "weight"
+    // knownInputs.weight = {light: [...], heavy: [...]};
+    // answers = Object.keys(knownInputs[type]);
+    // answers = ["light", "heavy"]
+    // const answerGroup = knownInputs[type][answers[0]];
     if (knownInputs[type][answers[0]].includes(input)) {
       console.log(`Input parsed with value "${answers[0]}"`);
       path = answers[0];
@@ -195,6 +201,7 @@ const validateInput = (input, type) => {
   };
   answer = input.toLowerCase();
   answerArray = answer.split(" ");
+
   // create an array of all words the user entered and check if any of these words match a keyword from the appropriate sub-object in knownInputs
 
   return answerArray.some(parseType);
