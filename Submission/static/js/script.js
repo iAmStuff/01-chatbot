@@ -221,22 +221,25 @@ const getBotReply = (msg) => {
   } else {
     // validate input
     type = currentBranch.questionType;
-    validateInput(msg, type);
-    // rewrite currentBranch with new root
-    currentBranch = currentBranch[path];
-    // record this change for debugging purposes
-    pathLogs += `.${path}`;
-    console.log(`Now at discussionTree${pathLogs}`);
-    // if statement to check for global commands. eg. restart, name change or whatever goes here
-    // if statement to see if we found the answer yet
-    if (currentBranch.length == 1) {
-      console.log("answer is an array with a single entry");
-      return `I suggest you try watching ${currentBranch[0]}`;
-    } else if (Array.isArray(currentBranch)) {
-      console.log("answer is array");
-      return `I suggest you try watching ${
-        currentBranch[Math.floor(Math.random() * currentBranch.length)]
-      }`; // random entry from answers array;
+    if (validateInput(msg, type)) {
+      // rewrite currentBranch with new root
+      currentBranch = currentBranch[path];
+      // record this change for debugging purposes
+      pathLogs += `.${path}`;
+      console.log(`Now at discussionTree${pathLogs}`);
+      // if statement to check for global commands. eg. restart, name change or whatever goes here
+      // if statement to see if we found the answer yet
+      if (currentBranch.length == 1) {
+        console.log("answer is an array with a single entry");
+        return `I suggest you try watching ${currentBranch[0]}`;
+      } else if (Array.isArray(currentBranch)) {
+        console.log("answer is array");
+        return `I suggest you try watching ${
+          currentBranch[Math.floor(Math.random() * currentBranch.length)]
+        }`; // random entry from answers array;
+      }
+    } else {
+      return `Sorry ${userName} but I don't quite understand that, maybe try a different wording?`;
     }
   }
   return currentBranch.question; // print next response to screen
