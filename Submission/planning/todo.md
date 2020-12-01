@@ -9,3 +9,4 @@
 ## Optional
 
 - Add ability to change userName at any point during the conversation. (I think this one might be difficult given how the getDiscussionTree function rewrites currentBranch in its entirety)
+- Add more usage of the user's name in discussionTree
