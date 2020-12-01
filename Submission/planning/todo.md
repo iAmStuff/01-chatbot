@@ -5,6 +5,7 @@
 - [x] Ask for username and utilize it during conversation
 - [x] Optimize parseType function to use loops or other functions to avoid repetition
 - [x] Add an actual response when input fails to validate as expected
+- [ ] Create a conversation reset function and add hook into getBotReply
 
 ## Optional
 

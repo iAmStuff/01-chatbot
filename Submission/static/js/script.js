@@ -1,7 +1,7 @@
 // Remember the name
 let userName = "";
 
-// keep track of how we have pathed through the discussionTree
+// keep track of how we have pathed through the discussionTree. log this variable at any time to debug
 let pathLogs = "";
 
 // Populate discussionTree object
@@ -181,10 +181,9 @@ const setName = (input) => {
   return userName;
 };
 
-// clone discussionTree to a variable so we can move the tree root
+// clone discussionTree to a global variable so we can move the tree root
 let currentBranch;
 
-// write an input validation function here
 const validateInput = (input, type) => {
   console.log("begin validateInput");
   const parseType = (input) => {
@@ -212,7 +211,6 @@ const validateInput = (input, type) => {
 
 // write a conversation reset function here
 
-// main
 const getBotReply = (msg) => {
   console.log("begin getBotReply");
   // first check for any special requests. eg empty username, dark mode...
@@ -245,6 +243,7 @@ const getBotReply = (msg) => {
   return currentBranch.question; // print next response to screen
 };
 
+// there be dragons
 const renderChatbox = () => {
   // get a reference to the chatbox element
   const chatboxEl = document.getElementById("chatbox");
