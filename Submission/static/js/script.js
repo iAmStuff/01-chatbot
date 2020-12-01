@@ -1,6 +1,9 @@
 // Remember the name
 let userName = "";
 
+// keep track of how we have pathed through the discussionTree
+let pathLogs = "";
+
 // Populate discussionTree object
 const getDiscussionTree = () => {
   // question: is the text the bot will print when it reaches that point in the tree
@@ -103,13 +106,13 @@ const getDiscussionTree = () => {
           questionType: "horror",
           yes: ["Higurashi no Naku Koro ni Gou"],
           no: ["Jujutsu Kaisen"],
-          finished: [
-            "Demon slayer: Kimetsu no Yaiba",
-            "Tengen Toppa Gurren Lagann",
-            "Noragami",
-            "Fullmetal Alchemist",
-          ],
         },
+        finished: [
+          "Demon slayer: Kimetsu no Yaiba",
+          "Tengen Toppa Gurren Lagann",
+          "Noragami",
+          "Fullmetal Alchemist",
+        ],
       },
     },
   };
@@ -148,7 +151,7 @@ const knownInputs = {
   },
   airing: {
     ongoing: ["currently airing", "ongoing", "airing", "current"],
-    finshed: ["finished", "over", "finished airing", "complete"],
+    finished: ["finished", "over", "finished airing", "complete"],
   },
   weight: {
     light: [
@@ -161,6 +164,10 @@ const knownInputs = {
       "simple",
     ],
     heavy: ["heavy", "heavyweight", "serious", "complex", "emotional", "rough"],
+  },
+  suffering: {
+    yes: ["yes", "yeah", "yea", "yep", "sure", "why not", "fine"],
+    no: ["no", "nope", "nay", "negative", "no thanks", "i'm good"],
   },
 };
 
@@ -187,17 +194,13 @@ const validateInput = (input, type) => {
     // knownInputs.weight = {light: [...], heavy: [...]};
     // answers = Object.keys(knownInputs[type]);
     // answers = ["light", "heavy"]
-    // const answerGroup = knownInputs[type][answers[0]];
-    if (knownInputs[type][answers[0]].includes(input)) {
-      console.log(`Input parsed with value "${answers[0]}"`);
-      path = answers[0];
-    } else if (knownInputs[type][answers[1]].includes(input)) {
-      console.log(`Input parsed with value "${answers[1]}"`);
-      path = answers[1];
-    } else {
-      console.log("Input failed to validate");
+    for (let i = 0; i < answers.length; i++) {
+      if (knownInputs[type][answers[i]].includes(input)) {
+        console.log(`Input parsed with value "${answers[i]}"`);
+        path = answers[i];
+        return true;
+      }
     }
-    // not too sure if these if statements can be combined into something simpler. considering I had to go the extra mile to make sure the code runs once for each answer group, I don't know of any ways i can make this simpler.
   };
   answer = input.toLowerCase();
   answerArray = answer.split(" ");
@@ -221,6 +224,9 @@ const getBotReply = (msg) => {
     validateInput(msg, type);
     // rewrite currentBranch with new root
     currentBranch = currentBranch[path];
+    // record this change for debugging purposes
+    pathLogs += `.${path}`;
+    console.log(`Now at discussionTree${pathLogs}`);
     // if statement to check for global commands. eg. restart, name change or whatever goes here
     // if statement to see if we found the answer yet
     if (currentBranch.length == 1) {
