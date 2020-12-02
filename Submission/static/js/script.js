@@ -223,8 +223,23 @@ const botCommands = (command) => {
       console.log("Restarting");
       currentBranch = getDiscussionTree();
       break;
+    // case "theme":
+    //   console.log("Changing theme");
+    //   break;
   }
 };
+
+const getAnswer = () => {
+  const randomAnime =
+    currentBranch[Math.floor(Math.random() * currentBranch.length)];
+  const answerLines = [
+    `I suggest you try watching ${randomAnime}`,
+    `Good news ${userName}! I've managed to narrow down the results significantly, here, give ${randomAnime} a watch!`,
+    `Oooo here's a good one ${userName}. Look up ${randomAnime}. I think you'll like it`,
+  ];
+  return answerLines[Math.floor(Math.random() * answerLines.length)];
+};
+
 const getBotReply = (msg) => {
   console.log("begin getBotReply");
   // first check if userName is set, if not, this will tell the program to save the next input as userName
@@ -244,14 +259,9 @@ const getBotReply = (msg) => {
       pathLogs += `.${path}`;
       console.log(`Now at discussionTree${pathLogs}`);
       // check to see if we found the answer yet
-      if (currentBranch.length == 1) {
-        console.log("answer is an array with a single entry");
-        return `I suggest you try watching ${currentBranch[0]}`;
-      } else if (Array.isArray(currentBranch)) {
-        console.log("answer is array");
-        return `I suggest you try watching ${
-          currentBranch[Math.floor(Math.random() * currentBranch.length)]
-        }`; // random entry from answers array;
+      if (Array.isArray(currentBranch)) {
+        console.log("answer found");
+        return getAnswer();
       }
     } else {
       return `Sorry ${userName} but I don't quite understand that, maybe try a different wording?`;
