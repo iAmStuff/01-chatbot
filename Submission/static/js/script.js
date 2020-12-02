@@ -126,6 +126,10 @@ let path = "";
 // things should improve once i get a chance to work on the validate input function.
 const knownInputs = {
   // keywords that contain spaces currently cannot be validated with this method. revisit this later
+  global: {
+    theme: ["theme", "dark", "light", "mode", "switch"],
+    restart: ["restart", "reset", "again"],
+  },
   horror: {
     yes: ["yes", "yeah", "yea", "yep", "sure", "why not", "fine"],
     no: ["no", "nope", "nay", "negative", "no thanks", "i'm good"],
@@ -197,7 +201,7 @@ const validateInput = (input, type) => {
       if (knownInputs[type][answers[i]].includes(input)) {
         console.log(`Input parsed with value "${answers[i]}"`);
         path = answers[i];
-        return true;
+        return path;
       }
     }
   };
@@ -206,27 +210,40 @@ const validateInput = (input, type) => {
 
   // create an array of all words the user entered and check if any of these words match a keyword from the appropriate sub-object in knownInputs
 
-  return answerArray.some(parseType);
+  if (answerArray.some(parseType)) {
+    return path;
+  }
+  return false;
 };
 
-// write a conversation reset function here
-
+// instructions on how to handle commands such as restart and theme switch.
+const botCommands = (command) => {
+  switch (command) {
+    case "restart":
+      console.log("Restarting");
+      currentBranch = getDiscussionTree();
+      break;
+  }
+};
 const getBotReply = (msg) => {
   console.log("begin getBotReply");
-  // first check for any special requests. eg empty username, dark mode...
+  // first check if userName is set, if not, this will tell the program to save the next input as userName
   if (userName == "") {
     setName(msg);
   } else {
-    // validate input
+    // then check if the input matches any special requests. eg empty username, dark mode...
+    const commandMsg = validateInput(msg, "global");
     type = currentBranch.questionType;
-    if (validateInput(msg, type)) {
+    if (commandMsg) {
+      botCommands(commandMsg);
+    } else if (validateInput(msg, type)) {
+      // if none of those tests pass, the usual conversation logic can commence
       // rewrite currentBranch with new root
       currentBranch = currentBranch[path];
       // record this change for debugging purposes
       pathLogs += `.${path}`;
       console.log(`Now at discussionTree${pathLogs}`);
-      // if statement to check for global commands. eg. restart, name change or whatever goes here
-      // if statement to see if we found the answer yet
+      // check to see if we found the answer yet
       if (currentBranch.length == 1) {
         console.log("answer is an array with a single entry");
         return `I suggest you try watching ${currentBranch[0]}`;
