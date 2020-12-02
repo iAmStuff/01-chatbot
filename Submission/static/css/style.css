@@ -1,12 +1,35 @@
+:root {
+  --body-gradient: linear-gradient(#eeeeef, #ddd);
+  --highlight: #00cdff;
+  --container-color: rgb(255, 246, 253);
+  --chatbox-color: white;
+}
+
+.dark {
+  --container-color: #4a4a4a;
+  --body-gradient: linear-gradient(#333, #2b2b2b);
+  --text-color: whitesmoke;
+  --chatbox-color: #2b2b2b;
+}
+
 body {
   padding: 0;
   margin: 0;
+  background-image: var(--body-gradient);
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 60rem;
+  margin: 0 auto;
+  background-color: var(--container-color);
+  border: solid var(--highlight);
+  border-width: 0 2px;
 }
 
 #chatbot-interface {
   display: flex;
   flex-direction: column;
-  margin-top: 1vh;
 }
 
 #bot-face {
@@ -50,6 +73,7 @@ body {
 }
 
 #chatbox {
+  background-color: var(--chatbox-color);
   width: 50vw;
   max-height: 30vh;
   border: 1px solid gray;
@@ -62,7 +86,7 @@ body {
 }
 
 .chat-item {
-  color: black;
+  color: var(--text-color);
 }
 
 .chat-item-user {

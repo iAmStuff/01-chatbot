@@ -216,6 +216,20 @@ const validateInput = (input, type) => {
   return false;
 };
 
+// get all the elements
+// I originally thought I would need to DOMify all of these.
+// But I then realised that all the sub objects would inherit the .dark class from body
+// Well they can stay here in the event I want to make other style choices with theme switch
+const bodyEl = document.querySelector("body");
+const containerDiv = document.querySelector(".container");
+const chatbotInterface = document.querySelector("#chatbox-interface");
+const chatContainer = document.querySelector("#chat-container");
+const chatInput = document.querySelector("#chat-input");
+const sendButton = document.querySelector("#btn-chat-send");
+const chatboxContainer = document.querySelector("#chatbox-container");
+const chatbox = document.querySelector("#chatbox");
+const chatItem = document.querySelector("chat-item");
+
 // instructions on how to handle commands such as restart and theme switch.
 const botCommands = (command) => {
   switch (command) {
@@ -223,10 +237,15 @@ const botCommands = (command) => {
       console.log("Restarting");
       currentBranch = getDiscussionTree();
       break;
-    // case "theme":
-    //   console.log("Changing theme");
-    //   break;
+    case "theme":
+      console.log("Changing theme");
+      themeSwitch();
+      break;
   }
+};
+
+const themeSwitch = () => {
+  bodyEl.classList.toggle("dark");
 };
 
 const getAnswer = () => {
