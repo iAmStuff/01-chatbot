@@ -6,6 +6,7 @@
 - [x] Optimize parseType function to use loops or other functions to avoid repetition
 - [x] Add an actual response when input fails to validate as expected
 - [x] Create a conversation reset function and add hook into getBotReply
+- [ ] Stop bot from reprinting question line when theme changes
 
 ## Optional
 
