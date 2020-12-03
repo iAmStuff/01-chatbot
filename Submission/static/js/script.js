@@ -85,8 +85,7 @@ const getDiscussionTree = () => {
           questionType: "suffering",
           yes: ["Clannad", "Kanojo Okarishimasu"],
           no: {
-            question:
-              "Do you want to watch a currently airing anime? Or would you rather watch something that has finished airing?",
+            question: `Damn thought I should give it a go. Anyway ${userName}, would you want to watch a currently airing anime? Or would you rather watch something that has finished airing?`,
             questionType: "airing",
             ongoing: ["Kamisama ni Natta Hi"],
             finished: [
@@ -102,7 +101,7 @@ const getDiscussionTree = () => {
           "Do you want to watch a currently airing anime? Or would you rather watch something that has finished airing?",
         questionType: "airing",
         ongoing: {
-          question: "Opinon on horror anime?",
+          question: `Real quick ${userName}, what's your opinon on horror anime?`,
           questionType: "horror",
           yes: ["Higurashi no Naku Koro ni Gou"],
           no: ["Jujutsu Kaisen"],
