@@ -310,8 +310,8 @@ const renderChatbox = () => {
   // create a chat item div element
   for (let message of recentMessages) {
     let markup = `
-      <div class="chat-item chat-item-bot">${message.bot.replyMsg}</div>
-      <div class="chat-item chat-item-user">${message.user.inputMsg}</div>
+      <div class="chat-item bot-text"><p class="chat-item-text bot-text">${message.bot.replyMsg}</p></div>
+      <div class="chat-item user-text"><p class="chat-item-text user-text">${message.user.inputMsg}</p></div>
     `;
     chatboxHTML += markup;
   }

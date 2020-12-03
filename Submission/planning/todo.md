@@ -2,11 +2,12 @@
 
 ## Important
 
-- [x] Ask for username and utilize it during conversation
-- [x] Optimize parseType function to use loops or other functions to avoid repetition
-- [x] Add an actual response when input fails to validate as expected
-- [x] Create a conversation reset function and add hook into getBotReply
-- [x] Stop bot from reprinting question line when theme changes
+- [x] Ask for username and utilize it during conversation.
+- [x] Optimize parseType function to use loops or other functions to avoid repetition.
+- [x] Add an actual response when input fails to validate as expected.
+- [x] Create a conversation reset function and add hook into getBotReply.
+- [x] Stop bot from reprinting question line when theme changes.
+- [ ] Stop bot from reaching a dead end after receiving an invalid input.
 
 ## Optional
 

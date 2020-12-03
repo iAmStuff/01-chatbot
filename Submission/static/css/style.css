@@ -3,6 +3,10 @@
   --highlight: #00cdff;
   --container-color: rgb(255, 246, 253);
   --chatbox-color: white;
+  --user-text-bg: #00cdff;
+  --bot-text-bg: #3cb12f;
+  --bot-text: black;
+  --user-text: black;
 }
 
 .dark {
@@ -86,14 +90,36 @@ body {
 }
 
 .chat-item {
-  color: var(--text-color);
+  margin: 0.5rem 0;
 }
 
-.chat-item-user {
-  font-family: "Roboto", sans-serif;
+.chat-item-text {
+  margin: 0.3rem;
+  display: inline-block;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.3rem;
 }
 
-.chat-item-bot {
+p.chat-item-text {
+  max-width: 85%;
+}
+
+.user-text {
+  float: left;
+}
+
+.bot-text {
+  float: right;
+}
+
+p.bot-text {
   font-family: "Roboto Mono", monospace;
-  text-align: right;
+  background: var(--bot-text-bg);
+  color: var(--bot-text);
+}
+
+p.user-text {
+  font-family: "Roboto", sans-serif;
+  background: var(--user-text-bg);
+  color: var(--user-text);
 }
