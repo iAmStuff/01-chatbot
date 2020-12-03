@@ -14,7 +14,7 @@ const getDiscussionTree = () => {
   // endpoint arrays should contain strings consisting of anime titles, this may change in the future to be objects that better describe the anime
   return {
     question: `Hi ${userName}, first things first: Are you new to anime?`,
-    questionType: "newbie",
+    questionType: "generic",
     yes: {
       question:
         "Would you rather watch romantic comedy style shows, or maybe something more action-y?",
@@ -133,7 +133,7 @@ const knownInputs = {
     yes: ["yes", "yeah", "yea", "yep", "sure", "why not", "fine"],
     no: ["no", "nope", "nay", "negative", "no thanks", "i'm good"],
   },
-  newbie: {
+  generic: {
     yes: ["yes", "yeah", "yea", "yep", "i guess so"],
     no: ["no", "nope", "nay", "negative", "i guess not"],
   },
