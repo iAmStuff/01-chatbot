@@ -245,15 +245,16 @@ const botCommands = (command) => {
 
 const themeSwitch = () => {
   bodyEl.classList.toggle("dark");
+  handleChatSubmit();
 };
 
 const getAnswer = () => {
   const randomAnime =
     currentBranch[Math.floor(Math.random() * currentBranch.length)];
   const answerLines = [
-    `I suggest you try watching ${randomAnime}`,
+    `I found one, I suggest you try watching ${randomAnime}.`,
     `Good news ${userName}! I've managed to narrow down the results significantly, here, give ${randomAnime} a watch!`,
-    `Oooo here's a good one ${userName}. Look up ${randomAnime}. I think you'll like it`,
+    `Oooo here's a good one ${userName}. Look up ${randomAnime}. I think you'll like it!`,
   ];
   return answerLines[Math.floor(Math.random() * answerLines.length)];
 };
