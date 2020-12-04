@@ -126,7 +126,7 @@ let path = "";
 const knownInputs = {
   // keywords that contain spaces currently cannot be validated with this method. revisit this later
   global: {
-    theme: ["theme", "dark", "light", "mode", "switch"],
+    theme: ["theme", "dark", "toggle", "mode", "switch"],
     restart: ["restart", "reset", "again"],
   },
   horror: {
