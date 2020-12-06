@@ -5,8 +5,8 @@
   --chatbox-color: white;
   --accent: #00cdff;
   --user-text-bg: #00cdff;
-  --bot-text-bg: #3cb12f;
-  --bot-text: black;
+  --bot-text-bg: #333;
+  --bot-text: white;
   --user-text: black;
   --button-bg: #3cb12f;
   --button-text: black;
@@ -17,6 +17,8 @@
   --body-gradient: linear-gradient(#333, #2b2b2b);
   --text-color: whitesmoke;
   --chatbox-color: #2b2b2b;
+  --bot-text-bg: whitesmoke;
+  --bot-text: black;
   --button-bg: white;
   --button-text: black;
 }

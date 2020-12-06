@@ -181,18 +181,6 @@ const setName = (input) => {
   console.log(`setting name to ${input}`);
   userName = input;
   currentBranch = getDiscussionTree();
-  // render chatbox with original prompt message
-  const botReply =
-    "So you wanna be a degenerate weeb eh? I don't have a name. But I'd like to know yours!";
-
-  const chatLog = {
-    bot: {
-      replyMsg: botReply,
-    },
-    timestamp: new Date(),
-  };
-  chatLogs.push(chatLog);
-  renderChatbox();
   return userName;
 };
 
@@ -366,6 +354,18 @@ const handleChatSubmit = (event) => {
   // render the chatbox
   renderChatbox();
 };
+
+// render first message from bot
+const botReply =
+  "So you wanna be a degenerate weeb eh? I don't have a name. But I'd like to know yours!";
+const chatLog = {
+  bot: {
+    replyMsg: botReply,
+  },
+  timestamp: new Date(),
+};
+chatLogs.push(chatLog);
+renderChatbox();
 
 // attach the submit event handler to the form here ...
 const formEl = document.getElementById("chat-form");
