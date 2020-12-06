@@ -11,7 +11,7 @@
 
 ## Optional
 
-- [ ] Make "theme" commands show in chat log
+- [x] Make "theme" commands show in chat log
 - [ ] Add ability to change userName at any point during the conversation. (I think this one might be difficult given how the getDiscussionTree function rewrites currentBranch in its entirety)
 - [ ] Add more usage of the user's name in discussionTree
 - [ ] Turn anime result strings into objects that include more detail on the anime.

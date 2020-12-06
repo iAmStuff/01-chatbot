@@ -177,6 +177,21 @@ const knownInputs = {
 // array to track the chat messages
 const chatLogs = [];
 
+// get all the elements
+// I originally thought I would need to DOMify all of these.
+// But I then realised that all the sub objects would inherit the .dark class from body
+// Well they can stay here in the event I want to make other style choices with theme switch
+const bodyEl = document.querySelector("body");
+const containerDiv = document.querySelector(".container");
+const chatbotInterface = document.querySelector("#chatbox-interface");
+const chatContainer = document.querySelector("#chat-container");
+const chatInput = document.querySelector("#chat-input");
+const sendButton = document.querySelector("#btn-chat-send");
+const chatboxContainer = document.querySelector("#chatbox-container");
+const chatbox = document.querySelector("#chatbox");
+const chatItem = document.querySelector("chat-item");
+
+// set user name
 const setName = (input) => {
   console.log(`setting name to ${input}`);
   userName = input;
@@ -215,22 +230,8 @@ const validateInput = (input, type) => {
   return false;
 };
 
-// get all the elements
-// I originally thought I would need to DOMify all of these.
-// But I then realised that all the sub objects would inherit the .dark class from body
-// Well they can stay here in the event I want to make other style choices with theme switch
-const bodyEl = document.querySelector("body");
-const containerDiv = document.querySelector(".container");
-const chatbotInterface = document.querySelector("#chatbox-interface");
-const chatContainer = document.querySelector("#chat-container");
-const chatInput = document.querySelector("#chat-input");
-const sendButton = document.querySelector("#btn-chat-send");
-const chatboxContainer = document.querySelector("#chatbox-container");
-const chatbox = document.querySelector("#chatbox");
-const chatItem = document.querySelector("chat-item");
-
 // instructions on how to handle commands such as restart and theme switch.
-const botCommands = (command) => {
+const botCommands = (command, msg) => {
   switch (command) {
     case "restart":
       console.log("Restarting");
@@ -238,14 +239,28 @@ const botCommands = (command) => {
       break;
     case "theme":
       console.log("Changing theme");
-      themeSwitch();
-      break;
+      // themeSwitch(msg);
+      bodyEl.classList.toggle("dark");
+      if (chatLogs.length <= 3) {
+        return `The page theme has been updated. So my first question to you ${userName} is are you new to anime ?`;
+      }
+      return `I have changed the page theme. Picking up where we left off: ${currentBranch.question}`;
   }
 };
 
-const themeSwitch = () => {
+const themeSwitch = (msg) => {
   bodyEl.classList.toggle("dark");
-  handleChatSubmit();
+  const chatLog = {
+    bot: {
+      replyMsg: "Changing theme",
+    },
+    user: {
+      inputMsg: msg,
+    },
+    timestamp: new Date(),
+  };
+  chatLogs.push(chatLog);
+  renderChatbox();
 };
 
 const getAnswer = () => {
@@ -264,32 +279,34 @@ const getBotReply = (msg) => {
   // first check if userName is set, if not, this will tell the program to save the next input as userName
   if (userName == "") {
     setName(msg);
-  } else {
-    // then check if the input matches any special requests. eg empty username, dark mode...
-    const commandMsg = validateInput(msg, "global");
-    type = currentBranch.questionType;
-    if (commandMsg) {
-      botCommands(commandMsg);
-    } else if (validateInput(msg, type)) {
-      // if none of those tests pass, the usual conversation logic can commence
-      // rewrite currentBranch with new root
-      currentBranch = currentBranch[path];
-      // record this change for debugging purposes
-      pathLogs += `.${path}`;
-      console.log(`Now at discussionTree${pathLogs}`);
-      // check to see if we found the answer yet
-      if (Array.isArray(currentBranch)) {
-        console.log("answer found");
-        return getAnswer();
-      }
-    } else {
-      return `Sorry ${userName} but I don't quite understand that, maybe try a different wording?`;
-    }
+    return currentBranch.question;
   }
-  return currentBranch.question; // print next response to screen
+  // then check if the input matches any special requests. restart program, dark mode...
+  const commandMsg = validateInput(msg, "global");
+  type = currentBranch.questionType;
+  if (commandMsg) {
+    return botCommands(commandMsg, msg);
+  }
+  if (validateInput(msg, type)) {
+    // if none of those tests pass, the usual conversation logic can commence
+    // rewrite currentBranch with new root
+    currentBranch = currentBranch[path];
+    // record this change for debugging purposes
+    pathLogs += `.${path}`;
+    console.log(`Now at discussionTree${pathLogs}`);
+    // check to see if we found the answer yet
+    if (Array.isArray(currentBranch)) {
+      console.log("answer found");
+      return getAnswer();
+    }
+    // if no answer has been found, print next question
+    return currentBranch.question;
+  } else {
+    // if all above checks fail, response is considered invalid
+    return `Sorry ${userName} but I don't quite understand that, maybe try a different wording?`;
+  }
 };
 
-// there be dragons
 const renderChatbox = () => {
   // get a reference to the chatbox element
   const chatboxEl = document.getElementById("chatbox");
@@ -309,11 +326,13 @@ const renderChatbox = () => {
 
   // create a chat item div element
   for (let message of recentMessages) {
-    let markup = `
-      <div class="chat-item bot-text"><p class="chat-item-text bot-text">${message.bot.replyMsg}</p></div>`;
+    let markup = ``;
     if (message.hasOwnProperty("user")) {
       markup += `<div class="chat-item user-text"><p class="chat-item-text user-text">${message.user.inputMsg}</p></div>
     `;
+    }
+    if (message.hasOwnProperty("bot")) {
+      markup += `<div class="chat-item bot-text"><p class="chat-item-text bot-text">${message.bot.replyMsg}</p></div>`;
     }
     chatboxHTML += markup;
   }
@@ -339,9 +358,6 @@ const handleChatSubmit = (event) => {
 
   // Create a data model to save the chat log against
   const chatLog = {
-    user: {
-      inputMsg: chatValue,
-    },
     bot: {
       replyMsg: botReply,
     },
@@ -349,6 +365,11 @@ const handleChatSubmit = (event) => {
   };
 
   // push the user message to the chat log
+
+  chatLogs[chatLogs.length - 1].user = {
+    inputMsg: chatValue,
+  };
+
   chatLogs.push(chatLog);
 
   // render the chatbox
@@ -369,6 +390,7 @@ const renderFirst = () => {
   renderChatbox();
 };
 renderFirst();
+
 // attach the submit event handler to the form here ...
 const formEl = document.getElementById("chat-form");
 formEl.addEventListener("submit", handleChatSubmit);
