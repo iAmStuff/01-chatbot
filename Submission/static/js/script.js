@@ -356,17 +356,19 @@ const handleChatSubmit = (event) => {
 };
 
 // render first message from bot
-const botReply =
-  "So you wanna be a degenerate weeb eh? I don't have a name. But I'd like to know yours!";
-const chatLog = {
-  bot: {
-    replyMsg: botReply,
-  },
-  timestamp: new Date(),
+const renderFirst = () => {
+  const botReply =
+    "So you wanna be a degenerate weeb eh? I don't have a name. But I'd like to know yours!";
+  const chatLog = {
+    bot: {
+      replyMsg: botReply,
+    },
+    timestamp: new Date(),
+  };
+  chatLogs.push(chatLog);
+  renderChatbox();
 };
-chatLogs.push(chatLog);
-renderChatbox();
-
+renderFirst();
 // attach the submit event handler to the form here ...
 const formEl = document.getElementById("chat-form");
 formEl.addEventListener("submit", handleChatSubmit);
