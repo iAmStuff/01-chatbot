@@ -239,28 +239,12 @@ const botCommands = (command, msg) => {
       break;
     case "theme":
       console.log("Changing theme");
-      // themeSwitch(msg);
       bodyEl.classList.toggle("dark");
       if (chatLogs.length <= 3) {
         return `The page theme has been updated. So my first question to you ${userName} is are you new to anime ?`;
       }
       return `I have changed the page theme. Picking up where we left off: ${currentBranch.question}`;
   }
-};
-
-const themeSwitch = (msg) => {
-  bodyEl.classList.toggle("dark");
-  const chatLog = {
-    bot: {
-      replyMsg: "Changing theme",
-    },
-    user: {
-      inputMsg: msg,
-    },
-    timestamp: new Date(),
-  };
-  chatLogs.push(chatLog);
-  renderChatbox();
 };
 
 const getAnswer = () => {
