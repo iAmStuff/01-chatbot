@@ -181,6 +181,18 @@ const setName = (input) => {
   console.log(`setting name to ${input}`);
   userName = input;
   currentBranch = getDiscussionTree();
+  // render chatbox with original prompt message
+  const botReply =
+    "So you wanna be a degenerate weeb eh? I don't have a name. But I'd like to know yours!";
+
+  const chatLog = {
+    bot: {
+      replyMsg: botReply,
+    },
+    timestamp: new Date(),
+  };
+  chatLogs.push(chatLog);
+  renderChatbox();
   return userName;
 };
 
@@ -310,9 +322,11 @@ const renderChatbox = () => {
   // create a chat item div element
   for (let message of recentMessages) {
     let markup = `
-      <div class="chat-item bot-text"><p class="chat-item-text bot-text">${message.bot.replyMsg}</p></div>
-      <div class="chat-item user-text"><p class="chat-item-text user-text">${message.user.inputMsg}</p></div>
+      <div class="chat-item bot-text"><p class="chat-item-text bot-text">${message.bot.replyMsg}</p></div>`;
+    if (message.hasOwnProperty("user")) {
+      markup += `<div class="chat-item user-text"><p class="chat-item-text user-text">${message.user.inputMsg}</p></div>
     `;
+    }
     chatboxHTML += markup;
   }
 
