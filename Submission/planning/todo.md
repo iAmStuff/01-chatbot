@@ -16,3 +16,4 @@
 - [ ] Add more usage of the user's name in discussionTree
 - [ ] Turn anime result strings into objects that include more detail on the anime.
 - [ ] Fix up this godawful css styling
+- [ ] Ensure first question re-prompt after theme change remains the same, even after numerous theme switches
