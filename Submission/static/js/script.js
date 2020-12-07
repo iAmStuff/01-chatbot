@@ -14,7 +14,7 @@ const getDiscussionTree = () => {
   // endpoint arrays should contain strings consisting of anime titles, this may change in the future to be objects that better describe the anime
   return {
     question: `Hi ${userName}, first things first: Are you new to anime?`,
-    questionType: "generic",
+    questionType: "newbie",
     yes: {
       question:
         "Would you rather watch romantic comedy style shows, or maybe something more action-y?",
@@ -137,6 +137,10 @@ const knownInputs = {
     yes: ["yes", "yeah", "yea", "yep", "i guess so"],
     no: ["no", "nope", "nay", "negative", "i guess not"],
   },
+  newbie: {
+    yes: ["yes", "yeah", "yea", "yep", "i guess so", "new", "first"],
+    no: ["no", "nope", "nay", "negative", "veteran", "returning"],
+  },
   genre: {
     romCom: [
       "romance",
@@ -233,7 +237,7 @@ const validateInput = (input, type) => {
 };
 
 // instructions on how to handle commands such as restart and theme switch.
-const botCommands = (command, msg) => {
+const botCommands = (command) => {
   switch (command) {
     case "restart":
       console.log("Restarting");
@@ -242,8 +246,8 @@ const botCommands = (command, msg) => {
     case "theme":
       console.log("Changing theme");
       bodyEl.classList.toggle("dark");
-      if (chatLogs.length <= 3) {
-        return `The page theme has been updated. So my first question to you ${userName} is are you new to anime ?`;
+      if (currentBranch.questionType == "newbie") {
+        return `The page theme has been updated. So my first question to you ${userName} is are you new to anime?`;
       }
       return `I have changed the page theme. Picking up where we left off: ${currentBranch.question}`;
   }
@@ -271,7 +275,7 @@ const getBotReply = (msg) => {
   const commandMsg = validateInput(msg, "global");
   type = currentBranch.questionType;
   if (commandMsg) {
-    return botCommands(commandMsg, msg);
+    return botCommands(commandMsg);
   }
   if (validateInput(msg, type)) {
     // if none of those tests pass, the usual conversation logic can commence
