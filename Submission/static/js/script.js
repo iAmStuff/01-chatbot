@@ -193,8 +193,10 @@ const chatItem = document.querySelector("chat-item");
 
 // set user name
 const setName = (input) => {
-  console.log(`setting name to ${input}`);
-  userName = input;
+  const inputArray = input.split("");
+  inputArray[0] = inputArray[0].toUpperCase();
+  userName = inputArray.join("");
+  console.log(`setting name to ${userName}`);
   currentBranch = getDiscussionTree();
   return userName;
 };
