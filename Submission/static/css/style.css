@@ -12,6 +12,7 @@
   --button-text: black;
   --header-bg: #2b2b2b;
   --bg-img-border-width: 0;
+  --input-bg: whitesmoke;
 }
 
 .dark {
@@ -21,9 +22,11 @@
   --chatbox-color: rgba(42, 42, 42, 0.5);
   --bot-text-bg: whitesmoke;
   --bot-text: black;
-  --button-bg: white;
-  --button-text: black;
+  --button-bg: #2b2b2b;
+  --button-text: white;
   --bg-img-border-width: 2px;
+  --bg-overlay: rgba(42, 42, 42, 0.8);
+  --input-bg: var(--button-bg);
 }
 
 body {
@@ -31,7 +34,7 @@ body {
   margin: 0;
   background-image: var(--body-gradient);
   display: grid;
-  grid-template-rows: 7rem 1fr;
+  grid-template-rows: 7rem auto;
   grid-template-areas:
     "header"
     "container";
@@ -42,13 +45,30 @@ body {
   max-width: 60rem;
   margin: 0 auto;
   padding: 0 0.5rem;
-  background-color: var(--container-color);
   border: solid var(--highlight);
   border-width: 0 2px;
   grid-area: container;
+  background-color: var(--bg-overlay);
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.container:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   background-image: url("../img/kaneki.jpg");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
 }
 
 header {
@@ -69,11 +89,6 @@ header > h1 {
   text-align: center;
 }
 
-#chatbot-interface {
-  display: flex;
-  flex-direction: column;
-}
-
 #hero {
   flex-direction: row;
   justify-content: center;
@@ -87,7 +102,7 @@ header > h1 {
 }
 
 #chat-container {
-  margin-top: 2vh;
+  margin-top: 1.5rem;
   display: flex;
   /* flex-direction: column; */
   justify-content: center;
@@ -107,6 +122,8 @@ header > h1 {
   border-radius: 0.6rem;
   padding: 0.6rem 0.3rem;
   margin: 0 1rem 0 0;
+  background-color: var(--input-bg);
+  color: var(--button-text);
 }
 
 #btn-chat-send {
@@ -123,22 +140,21 @@ header > h1 {
 }
 
 #chatbox-container {
-  margin-top: 2vh;
+  min-height: auto;
   display: flex;
   justify-content: center;
+  margin: 1.5rem 0 2rem 0;
 }
 
 #chatbox {
   background-color: var(--chatbox-color);
   width: 100%;
-  max-height: 30vh;
+  /* max-height: auto; */
   border: 1px solid gray;
   display: flex;
   flex-direction: column;
   padding: 10px;
   font-size: 1.2em;
-  overflow: hidden;
-  overflow-y: scroll;
 }
 
 .chat-item {
@@ -178,7 +194,7 @@ p.user-text {
 
 @media only screen and (min-width: 32rem) {
   body {
-    grid-template-rows: 3rem 1fr;
+    grid-template-rows: 3rem auto;
   }
   .container {
     padding: 0 4rem;

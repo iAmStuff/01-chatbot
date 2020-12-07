@@ -15,5 +15,5 @@
 - [ ] Add ability to change userName at any point during the conversation. (I think this one might be difficult given how the getDiscussionTree function rewrites currentBranch in its entirety)
 - [ ] Add more usage of the user's name in discussionTree
 - [ ] Turn anime result strings into objects that include more detail on the anime.
-- [ ] Fix up this godawful css styling
-- [ ] Ensure first question re-prompt after theme change remains the same, even after numerous theme switches
+- [x] Fix up this godawful css styling
+- [x] Ensure first question re-prompt after theme change remains the same, even after numerous theme switches

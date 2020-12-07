@@ -242,7 +242,7 @@ const botCommands = (command) => {
     case "restart":
       console.log("Restarting");
       currentBranch = getDiscussionTree();
-      break;
+      return `Alright, from the top: Would you consider yourself new to anime?`;
     case "theme":
       console.log("Changing theme");
       bodyEl.classList.toggle("dark");
