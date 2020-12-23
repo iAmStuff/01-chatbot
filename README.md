@@ -54,7 +54,7 @@ To receive the LO credits - all summative projects must receive a C- Grade
         Meets the acceptance criteria for Part A. Problem is clearly stated, in an engaging and clear tone. No spelling mistakes or grammatical errors. 
       </td>
       <td>5%</td>
-      <td></td>
+      <td>5%</td>
     </tr>
     <tr>
       <td>Part B</td>
@@ -62,7 +62,7 @@ To receive the LO credits - all summative projects must receive a C- Grade
         Meets the acceptance criteria for Part B. Flow charts are legible, and have an adequate level of detail to enable tasks to be created for development. Demonstrates good understanding of programming logic, by having a flow chart that is able to be translated into programming concepts such as if statements. 
       </td>
       <td>15%</td>
-      <td></td>
+      <td>10.5%</td>
     </tr>
     <tr>
       <td>Part C</td>
@@ -70,7 +70,7 @@ To receive the LO credits - all summative projects must receive a C- Grade
         Meets the acceptance criteria for Part C. Automated tests pass in GitHub Classroom.
       </td>
       <td>50%</td>
-      <td></td>
+      <td>50%</td>
     </tr>
     <tr>
       <td>Code quality</td>
@@ -80,7 +80,7 @@ To receive the LO credits - all summative projects must receive a C- Grade
         variables. Functions are used to reduce repetition in logic, and are kept at a reasonable size. No errors/bugs/syntax problems.
       </td>
       <td>20%</td>
-      <td></td>
+      <td>20%</td>
     </tr>
     <tr>
       <td>Development process</td>
@@ -90,12 +90,12 @@ To receive the LO credits - all summative projects must receive a C- Grade
         messages that explain the change in the commit. 
       </td>
       <td>10%</td>
-      <td></td>
+      <td>10%</td>
     </tr>
     <tr>
       <th colspan="2" align="left">Total grade</th>
       <td>100%</td>
-      <td>/100</td>
+      <td>95.5/100</td>
     </tr>
   </table>
 </details>
